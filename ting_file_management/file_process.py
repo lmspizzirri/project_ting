@@ -1,3 +1,6 @@
+from ting_file_management.file_management import txt_importer
+import sys
+
 def process(path_file, instance):
     txt = txt_importer(path_file)
 
@@ -11,21 +14,23 @@ def process(path_file, instance):
         if instance.search(each)["nome_do_arquivo"] == path_file:
             return
     
-    instance.enqueue(dic)
+    instance.enqueue(dict)
 
-    return sys.stdout.write(str(dic))
+    return sys.stdout.write(str(dict))
 
 def remove(instance):
     if len(instance) > 0:
-        item = instance.dequeue()['nome_do_arquivo']
-        return sys.stdout.write(f'Arquivo {item} removido com sucesso\n')
+        item = instance.dequeue()
+        return sys.stdout.write(
+        f'Arquivo {item["nome_do_arquivo"]} removido com sucesso\n'
+        )
     else:
         return sys.stdout.write('Não há elementos\n')
 
 
 def file_metadata(instance, position):
     try:
-        response = instance.read_instance()[position]
-        sys.stdout.write(str(response))
+        response = instance.search(position)
+        return sys.stdout.write(str(response))
     except IndexError:
         sys.stderr.write("Posição inválida")

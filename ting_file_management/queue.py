@@ -10,13 +10,14 @@ class Queue(AbstractQueue):
 
     def enqueue(self, value):
         self.queue.append(value)
+        return True
 
     def dequeue(self):
         if len(self.queue) == 0:
             return None
-        self.queue.pop(0)
+        return self.queue.pop(0)
 
     def search(self, index):
-        if index < 0 or index > len(self):
-            raise IndexError('Índice Inválido ou Inexistente')
+        if index < 0 or index >= len(self.queue):
+            raise IndexError("Índice Inválido ou Inexistente")
         return self.queue[index]
