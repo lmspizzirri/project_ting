@@ -1,5 +1,5 @@
 def exists_word(word, instance):
-   result = []
+    result = []
     for file in range(len(instance)):
         file = instance.search(file)
         occurrences = [
